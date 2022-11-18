@@ -1,10 +1,9 @@
-public class PaperTechnician implements Runnable{
-
+public class TonerTechnician implements Runnable {
     private String name;
     private ThreadGroup group;
     private ServicePrinter printer;
 
-    public PaperTechnician(String name, ThreadGroup group, ServicePrinter printer) {
+    public TonerTechnician(String name, ThreadGroup group, ServicePrinter printer) {
         super();
         this.name = name;
         this.group = group;
@@ -12,13 +11,14 @@ public class PaperTechnician implements Runnable{
     }
 
 
+
     @Override
     public void run() {
         int count = 0;
         for (int i = 0; i < 3; i++) {
-            printer.refillPaper();
+            printer.replaceTonerCartridge();
 
-            if(((LaserPrinter)printer).isPaperRefilled()){
+            if(((LaserPrinter)printer).isTornerRefilled()){
                 count ++;
             }
             try {
@@ -28,6 +28,7 @@ public class PaperTechnician implements Runnable{
                 throw new RuntimeException(e);
             }
         }
-        System.out.println("Paper Technician Finished, packs of paper used: " + count);
+        System.out.println("Toner Technician Finished cartridges replaced: " + count);
     }
+
 }
